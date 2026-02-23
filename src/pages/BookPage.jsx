@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom"
 
+// import componente per il listato delle reviews
+import CardReview from "../components/CardReview"
+
 const BookPage = () => {
     return (
         <>
             <header id="book" className="border-bottom border-1 mb-3">
+                <div className="d-flex mb-3">
+                    <img src="https://www.jdandj.com/uploads/8/0/0/8/80083458/s611371146998849390_p82_i2_w1600.jpeg" alt="titolo del libro" />
+                </div>
                 <h1>Titolo libro</h1>
                 <h3 className="text-muted"><i>By Nome autore</i></h3>
                 <p>lorem ipsm dolor sit amet</p>
@@ -13,7 +19,10 @@ const BookPage = () => {
                     <h4>Our community reviews</h4>
                 </header>
                 {/* Reviews qui */}
-                <p>elenco delle reviews</p>
+                <CardReview />
+                <CardReview />
+                <CardReview />
+                <CardReview />
             </section>
             <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
                 <Link className="btn btn-secondary" to="/">Back to home</Link>

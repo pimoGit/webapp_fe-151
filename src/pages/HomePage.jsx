@@ -1,3 +1,7 @@
+// importa componente per il listato
+import CardBook from "../components/CardBook"
+
+
 const HomePage = () => {
     return (
         <>
@@ -5,9 +9,16 @@ const HomePage = () => {
             <h2><i>The boolean nerd book community</i></h2>
 
             <div>
-                <p className="row row-cols-3 mt-4">
-                    qui ci sarà elenco dei libri
-                </p>
+                <div className="row row-cols-3 mt-4">
+                    <CardBook />
+
+                    <CardBook />
+                    <CardBook />
+                    <CardBook />
+                    <CardBook />
+                    <CardBook />
+                    <CardBook />
+                </div>
             </div>
         </>
     )
