@@ -3,7 +3,7 @@ import axios from "axios";
 // import state e effect
 import { useState, useEffect } from "react";
 
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 
 // import componente per il listato delle reviews
 import CardReview from "../components/CardReview"
@@ -16,6 +16,9 @@ const BookPage = () => {
     // prendiamo id libro da url rotta
     const { id } = useParams();
 
+    // creiamo istanza del navigate per poterlo utilizzare
+    const redirect = useNavigate();
+
     // settiamo la var di stato per il libro
     const [book, setBook] = useState({});
 
@@ -25,6 +28,7 @@ const BookPage = () => {
             .then(res => { setBook(res.data); })
             .catch(err => {
                 console.log(err);
+                if (err.status = 404) redirect('/404');
             })
     }
 
