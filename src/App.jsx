@@ -1,6 +1,7 @@
 // importiamo le pages
 import HomePage from "./pages/HomePage"
 import BookPage from "./pages/BookPage"
+import NotFoundPage from "./pages/NotFoundPage"
 
 // importiamo il layout
 import DefaultLayout from "./layouts/DefaultLayout"
@@ -16,6 +17,7 @@ function App() {
                 <Route element={<DefaultLayout />}>
                     <Route index element={<HomePage />} />
                     <Route path="/books/:id" element={<BookPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>
