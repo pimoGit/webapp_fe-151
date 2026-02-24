@@ -1,53 +1,39 @@
-import { Link } from "react-router-dom"
+// import axios
+import axios from "axios";
+// import state e effect
+import { useState, useEffect } from "react";
+
+import { Link, useParams } from "react-router-dom"
 
 // import componente per il listato delle reviews
 import CardReview from "../components/CardReview"
 
-// dati temporanei per test props
-const book = {
-    "id": 5,
-    "title": "Moby Dick",
-    "author": "Herman Melville",
-    "abstract": "A tale of obsession and revenge on the high seas.",
-    "image": "moby_dick.jpg",
-    "created_at": "2024-11-26T09:58:09.000Z",
-    "updated_at": "2024-12-20T10:30:54.000Z",
-    "reviews": [
-        {
-            "id": 13,
-            "book_id": 5,
-            "name": "Mia",
-            "vote": 5,
-            "text": "A gripping and complex tale.",
-            "created_at": "2024-11-26T09:58:09.000Z",
-            "updated_at": "2024-11-26T09:58:09.000Z"
-        },
-        {
-            "id": 14,
-            "book_id": 5,
-            "name": "Noah",
-            "vote": 3,
-            "text": "Too long and detailed for me, but interesting.",
-            "created_at": "2024-11-26T09:58:09.000Z",
-            "updated_at": "2024-11-26T09:58:09.000Z"
-        },
-        {
-            "id": 15,
-            "book_id": 5,
-            "name": "Olivia",
-            "vote": 4,
-            "text": "An epic journey with strong symbolism.",
-            "created_at": "2024-11-26T09:58:09.000Z",
-            "updated_at": "2024-11-26T09:58:09.000Z"
-        }
-    ]
-};
+const endpoint = "http://localhost:3000/api/books/";
+
 
 const BookPage = () => {
 
+    // prendiamo id libro da url rotta
+    const { id } = useParams();
+
+    // settiamo la var di stato per il libro
+    const [book, setBook] = useState({});
+
+    // funzione che gestisce la chiamata alla rotta show di BE
+    const fetchBook = () => {
+        axios.get(endpoint + id)
+            .then(res => { setBook(res.data); })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    // richiamo funzione di fetch al montaggio della page
+    useEffect(fetchBook, []);
+
     // funzione di rendering del listato dei libri
     const rederReviews = () => {
-        return book.reviews.map(review => {
+        return book.reviews?.map(review => {
             return (
                 <CardReview reviewProp={review} key={review.id} />
             )
