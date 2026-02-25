@@ -7,6 +7,8 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 
 // import componente per il listato delle reviews
 import CardReview from "../components/CardReview"
+// import componente per form review
+import ReviewForm from "../components/ReviewForm";
 
 const endpoint = "http://localhost:3000/api/books/";
 
@@ -59,6 +61,9 @@ const BookPage = () => {
                     <h4>Our community reviews</h4>
                 </header>
                 {rederReviews()}
+            </section>
+            <section>
+                <ReviewForm />
             </section>
             <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
                 <Link className="btn btn-secondary" to="/">Back to home</Link>
