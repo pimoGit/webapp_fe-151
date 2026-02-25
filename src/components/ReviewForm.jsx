@@ -4,7 +4,7 @@ import { useState } from "react"
 const ReviewForm = (props) => {
 
     // ricaviamo in prop id del libro
-    const { book_id } = props;
+    const { book_id, reloadReviews } = props;
 
     // creiamo stringa di ref all'endpoint del BE
     const endpoint = `http://localhost:3000/api/books/${book_id}/reviews`;
@@ -35,7 +35,10 @@ const ReviewForm = (props) => {
         // gestisci la chiamata in post all'endpoint in axios
         axios.post(endpoint, formData, { headers: { 'Content-Type': 'application/json' } })
             .then(() => {
+                // svuota campi form (e var di stato)
                 setFormData(initialFormData);
+                // ri-esegui funzione di chiamata su page padre
+                reloadReviews();
             })
             .catch((err) => {
                 console.log(err);
