@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 
 import { Link, useParams, useNavigate } from "react-router-dom"
 
+// import hook custom del contesto globale
+import { useGlobal } from "../contexts/GlobalContext";
+
 // import componente per il listato delle reviews
 import CardReview from "../components/CardReview"
 // import componente per form review
@@ -13,7 +16,15 @@ import ReviewForm from "../components/ReviewForm";
 const endpoint = "http://localhost:3000/api/books/";
 
 
+
+
 const BookPage = () => {
+
+    // attivo l'utilizzo del/dei valore/i messi a disposizione del contesto globale
+    const { setIsLoading } = useGlobal();
+
+    // funzione per dellay caricamento TEMP (solo come test)
+    // const setLoadingFalse = () => { setIsLoading(false) }
 
     // prendiamo id libro da url rotta
     const { id } = useParams();
@@ -26,12 +37,16 @@ const BookPage = () => {
 
     // funzione che gestisce la chiamata alla rotta show di BE
     const fetchBook = () => {
+        // parte la chimata cambio var stato context di conseguenza
+        setIsLoading(true);
+
         axios.get(endpoint + id)
             .then(res => { setBook(res.data); })
             .catch(err => {
                 console.log(err);
                 if (err.status = 404) redirect('/404');
             })
+            .finally(setIsLoading(false))
     }
 
     // richiamo funzione di fetch al montaggio della page
